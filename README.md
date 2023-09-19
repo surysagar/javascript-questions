@@ -292,7 +292,7 @@ console.log(freddie.colorChange('orange'));
 - A: `orange`
 - B: `purple`
 - C: `green`
-- D: `TypeError`
+- D: `TypeError` // due to static method
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -325,7 +325,7 @@ console.log(greetign);
 
 It logs the object, because we just created an empty object on the global object! When we mistyped `greeting` as `greetign`, the JS interpreter actually saw this as `global.greetign = {}` (or `window.greetign = {}` in a browser).
 
-In order to avoid this, we can use `"use strict"`. This makes sure that you have declared a variable before setting it equal to anything.
+In order to avoid this, we can use `"use strict"`// absolutely. This makes sure that you have declared a variable before setting it equal to anything.
 
 </p>
 </details>
@@ -377,7 +377,7 @@ Person.getFullName = function() {
 console.log(member.getFullName());
 ```
 
-- A: `TypeError`
+- A: `TypeError` // yes below is typeerror vs syntaxerror desc.
 - B: `SyntaxError`
 - C: `Lydia Hallie`
 - D: `undefined` `undefined`
@@ -385,6 +385,21 @@ console.log(member.getFullName());
 <details><summary><b>Answer</b></summary>
 <p>
 
+// desc of diff.
+
+What's the differnce between
+
+TypeError: ... is undefined
+and
+
+ReferenceError: ... is not defined
+?
+ANSWER:
+A ReferenceError occurs when you try to use a variable that doesn't exist at all.
+
+A TypeError occurs when the variable exists, but the operation you're trying to perform is not appropriate for the type of value it contains. In the case where the detailed message says "is not defined",
+
+A syntax error : means there’s an error in syntax such as misspelled keywords, a missing punctuation character, a missing bracket, a missing closing parenthesis or any errors in basic framing sequence of characters or tokens which is necessarily to be written in a particular programming language.
 #### Answer: A
 
 In JavaScript, functions are objects, and therefore, the method `getFullName` gets added to the constructor function object itself. For that reason, we can call `Person.getFullName()`, but `member.getFullName` throws a `TypeError`. 
@@ -392,7 +407,7 @@ In JavaScript, functions are objects, and therefore, the method `getFullName` ge
 If you want a method to be available to all object instances, you have to add it to the prototype property:
 
 ```js
-Person.prototype.getFullName = function() {
+Person.prototype.getFullName = function() { // yup prototype is needed
   return `${this.firstName} ${this.lastName}`;
 };
 ```
@@ -441,7 +456,7 @@ We said that `this.firstName` equals `"Sarah"` and `this.lastName` equals `"Smit
 - A: Target > Capturing > Bubbling
 - B: Bubbling > Target > Capturing
 - C: Target > Bubbling > Capturing
-- D: Capturing > Target > Bubbling
+- D: Capturing > Target > Bubbling // yes
 
 <details><summary><b>Answer</b></summary>
 <p>
@@ -532,7 +547,14 @@ The **prefix** unary operator `++`:
 1. Increments the value (number is now `2`)
 2. Returns the value (this returns `2`)
 
-This returns `0 2 2`.
+This returns `0 2 2
+
+// tested in chrome console
+let number = 0;
+console.log(number++);
+number;
+VM1284:2 0
+1
 
 </p>
 </details>
@@ -563,7 +585,7 @@ getPersonInfo`${person} is ${age} years old`;
 
 #### Answer: B
 
-If you use tagged template literals, the value of the first argument is always an array of the string values. The remaining arguments get the values of the passed expressions!
+If you use tagged template literals[// new for me], the value of the first argument is always an array of the string values. The remaining arguments get the values of the passed expressions!
 
 </p>
 </details>
@@ -600,7 +622,8 @@ When testing equality, primitives are compared by their _value_, while objects a
 The two objects that we are comparing don't have that: the object we passed as a parameter refers to a different location in memory than the object we used in order to check equality.
 
 This is why both `{ age: 18 } === { age: 18 }` and `{ age: 18 } == { age: 18 }` return `false`.
-
+// nice explanation 
+.. thyat's why we use JSON.stringify(o1) === JSON.stringify(o2)
 </p>
 </details>
 
@@ -654,7 +677,7 @@ getAge();
 <p>
 
 #### Answer: C
-
+yes , cool
 With `"use strict"`, you can make sure that you don't accidentally declare global variables. We never declared the variable `age`, and since we use `"use strict"`, it will throw a reference error. If we didn't use `"use strict"`, it would have worked, since the property `age` would have gotten added to the global object.
 
 </p>
@@ -692,7 +715,7 @@ sessionStorage.setItem('cool_secret', 123);
 ```
 
 - A: Forever, the data doesn't get lost.
-- B: When the user closes the tab.
+- B: When the user closes the tab.// absolutely
 - C: When the user closes the entire browser, not only the tab.
 - D: When the user shuts off their computer.
 
@@ -760,7 +783,7 @@ set.has(1);
 
 #### Answer: C
 
-All object keys (excluding Symbols) are strings under the hood, even if you don't type it yourself as a string. This is why `obj.hasOwnProperty('1')` also returns true.
+All object keys (excluding Symbols) are strings under the hood, even if you don't type it yourself as a string. This is why `obj.hasOwnProperty('1')` also returns true. //nice
 
 It doesn't work that way for a set. There is no `'1'` in our set: `set.has('1')` returns `false`. It has the numeric type `1`, `set.has(1)` returns `true`.
 
@@ -793,7 +816,7 @@ If you have two keys with the same name, the key will be replaced. It will still
 
 ---
 
-###### 26. The JavaScript global execution context creates two things for you: the global object, and the "this" keyword.
+###### 26. The JavaScript global execution context creates two things for you: the global object, and the "this" keyword. // awesome
 
 - A: true
 - B: false
@@ -830,7 +853,7 @@ for (let i = 1; i < 5; i++) {
 
 #### Answer: C
 
-The `continue` statement skips an iteration if a certain condition returns `true`.
+The `continue` statement skips [^ AWESOME] an iteration if a certain condition returns `true`.
 
 </p>
 </details>
@@ -876,6 +899,9 @@ const c = { key: 'c' };
 a[b] = 123;
 a[c] = 456;
 
+JSON.stringify(a);
+//'{"[object Object]":456}'
+
 console.log(a[b]);
 ```
 
@@ -891,7 +917,9 @@ console.log(a[b]);
 
 Object keys are automatically converted into strings. We are trying to set an object as a key to object `a`, with the value of `123`.
 
-However, when we stringify an object, it becomes `"[object Object]"`. So what we are saying here, is that `a["[object Object]"] = 123`. Then, we can try to do the same again. `c` is another object that we are implicitly stringifying. So then, `a["[object Object]"] = 456`.
+However, when we stringify an object, it becomes `"[object Object]"`. So what we are saying here, is that `a["[object Object]"] = 123`. 
+// this is terrific...
+Then, we can try to do the same again. `c` is another object that we are implicitly stringifying. So then, `a["[object Object]"] = 456`.
 
 Then, we log `a[b]`, which is actually `a["[object Object]"]`. We just set that to `456`, so it returns `456`.
 
@@ -975,7 +1003,7 @@ This is where an event loop starts to work. An **event loop** looks at the stack
 
 #### Answer: C
 
-The deepest nested element that caused the event is the target of the event. You can stop bubbling by `event.stopPropagation`
+The deepest nested element that caused the event is the target of the event. You can stop bubbling [bubbling is right word*] by `event.stopPropagation`
 
 </p>
 </details>
@@ -1061,7 +1089,7 @@ console.log(typeof sayHi());
 
 #### Answer: B
 
-The `sayHi` function returns the returned value of the immediately invoked function expression (IIFE). This function returned `0`, which is type `"number"`.
+The `sayHi` function returns the returned value of the immediately invoked function expression (IIFE). This function returned `0`, which is type `"number"`. [AWESOME]
 
 FYI: there are only 7 built-in types: `null`, `undefined`, `boolean`, `number`, `string`, `object`, and `symbol`. `"function"` is not a type, since functions are objects, it's of type `"object"`.
 
@@ -1102,7 +1130,7 @@ There are 8 falsy values:
 - `-0`
 - `0n` (BigInt(0))
 
-Function constructors, like `new Number` and `new Boolean` are truthy.
+Function constructors, like `new Number` and `new Boolean` are truthy.[awesome]
 
 </p>
 </details>
@@ -1126,7 +1154,7 @@ console.log(typeof typeof 1);
 #### Answer: B
 
 `typeof 1` returns `"number"`.
-`typeof "number"` returns `"string"`
+`typeof "number"` returns `"string"`  [:) FUNNY]
 
 </p>
 </details>
@@ -1297,7 +1325,7 @@ setInterval(() => console.log('Hi'), 1000);
 
 #### Answer: A
 
-It returns a unique id. This id can be used to clear that interval with the `clearInterval()` function.
+It returns a unique id. This id can be used to clear that interval with the `clearInterval()` function. [interesting ]
 
 </p>
 </details>
@@ -1320,7 +1348,7 @@ It returns a unique id. This id can be used to clear that interval with the `cle
 
 #### Answer: A
 
-A string is an iterable. The spread operator maps every character of an iterable to one element.
+A string is an iterable. The spread operator maps every character of an iterable to one element.[OOPS!]
 
 </p>
 </details>
@@ -1350,7 +1378,7 @@ console.log(gen.next().value);
 <p>
 
 #### Answer: C
-
+[AWESOME!!]
 Regular functions cannot be stopped mid-way after invocation. However, a generator function can be "stopped" midway, and later continue from where it stopped. Every time a generator function encounters a `yield` keyword, the function yields the value specified after it. Note that the generator function in that case doesn’t _return_ the value, it _yields_ the value.
 
 First, we initialize the generator function with `i` equal to `10`. We invoke the generator function using the `next()` method. The first time we invoke the generator function, `i` is equal to `10`. It encounters the first `yield` keyword: it yields the value of `i`. The generator is now "paused", and `10` gets logged.
@@ -1385,7 +1413,7 @@ Promise.race([firstPromise, secondPromise]).then(res => console.log(res));
 <p>
 
 #### Answer: B
-
+// good! to know
 When we pass multiple promises to the `Promise.race` method, it resolves/rejects the _first_ promise that resolves/rejects. To the `setTimeout` method, we pass a timer: 500ms for the first promise (`firstPromise`), and 100ms for the second promise (`secondPromise`). This means that the `secondPromise` resolves first with the value of `'two'`. `res` now holds the value of `'two'`, which gets logged.
 
 </p>
@@ -1417,7 +1445,7 @@ First, we declare a variable `person` with the value of an object that has a `na
 
 <img src="https://i.imgur.com/TML1MbS.png" width="200">
 
-Then, we declare a variable called `members`. We set the first element of that array equal to the value of the `person` variable. Objects interact by _reference_ when setting them equal to each other. When you assign a reference from one variable to another, you make a _copy_ of that reference. (note that they don't have the _same_ reference!)
+Then, we declare a variable called `members`. We set the first element of that array equal to the value of the `person` variable. Objects interact by _reference_ when setting them equal to each other.[!awesome *****] `When you assign a reference from one variable to another, you make a _copy_ of that reference.` (note that they don't have the _same_ reference!)
 
 <img src="https://i.imgur.com/FSG5K3F.png" width="300">
 
@@ -1454,7 +1482,7 @@ for (const item in person) {
 <p>
 
 #### Answer: B
-
+[BINGO**]
 With a `for-in` loop, we can iterate through object keys, in this case `name` and `age`. Under the hood, object keys are strings (if they're not a Symbol). On every loop, we set the value of `item` equal to the current key it’s iterating over. First, `item` is equal to `name`, and gets logged. Then, `item` is equal to `age`, which gets logged.
 
 </p>
@@ -1504,7 +1532,7 @@ const num = parseInt('7*6', 10);
 <p>
 
 #### Answer: C
-
+[BINGO!!!#]
 Only the first numbers in the string is returned. Based on the _radix_ (the second argument in order to specify what type of number we want to parse it to: base 10, hexadecimal, octal, binary, etc.), the `parseInt` checks whether the characters in the string are valid. Once it encounters a character that isn't a valid number in the radix, it stops parsing and ignores the following characters.
 
 `*` is not a valid number. It only parses `"7"` into the decimal `7`. `num` now holds the value of `7`.
@@ -1532,7 +1560,7 @@ Only the first numbers in the string is returned. Based on the _radix_ (the seco
 <p>
 
 #### Answer: C
-
+[*HELPGUL]
 When mapping over the array, the value of `num` is equal to the element it’s currently looping over. In this case, the elements are numbers, so the condition of the if statement `typeof num === "number"` returns `true`. The map function creates a new array and inserts the values returned from the function.
 
 However, we don’t return a value. When we don’t return a value from the function, the function returns `undefined`. For every element in the array, the function block gets called, so for each element we return `undefined`.
@@ -1567,7 +1595,7 @@ console.log(person, birthYear);
 <p>
 
 #### Answer: A
-
+//[-DEFINITLY its a tought concept but awesome****]
 Arguments are passed by _value_, unless their value is an object, then they're passed by _reference_. `birthYear` is passed by value, since it's a string, not an object. When we pass arguments by value, a _copy_ of that value is created (see question 46).
 
 The variable `birthYear` has a reference to the value `"1997"`. The argument `year` also has a reference to the value `"1997"`, but it's not the same value as `birthYear` has a reference to. When we update the value of `year` by setting `year` equal to `"1998"`, we are only updating the value of `year`. `birthYear` is still equal to `"1997"`.
@@ -1591,7 +1619,7 @@ function sayHi() {
     const data = greeting();
     console.log('It worked!', data);
   } catch (e) {
-    console.log('Oh no an error:', e);
+    console.log('Oh no an error:', e); // e is tricky here, custom exception thrown..
   }
 }
 
@@ -1610,7 +1638,7 @@ sayHi();
 
 With the `throw` statement, we can create custom errors. With this statement, you can throw exceptions. An exception can be a <b>string</b>, a <b>number</b>, a <b>boolean</b> or an <b>object</b>. In this case, our exception is the string `'Hello world!'`.
 
-With the `catch` statement, we can specify what to do if an exception is thrown in the `try` block. An exception is thrown: the string `'Hello world!'`. `e` is now equal to that string, which we log. This results in `'Oh an error: Hello world!'`.
+With the `catch` statement, we can specify what to do if an exception is thrown in the `try` block. An exception is thrown: the string `'Hello world!'`. `e` [AWESOME explanation here!****] is now equal to that string, which we log. This results in `'Oh an error: Hello world!'`.
 
 </p>
 </details>
@@ -1638,7 +1666,7 @@ console.log(myCar.make);
 <p>
 
 #### Answer: B
-
+[this i know just revised!]
 When you return a property, the value of the property is equal to the _returned_ value, not the value set in the constructor function. We return the string `"Maserati"`, so `myCar.make` is equal to `"Maserati"`.
 
 </p>
@@ -1719,7 +1747,7 @@ pet.bark();
 
 We can delete properties from objects using the `delete` keyword, also on the prototype. By deleting a property on the prototype, it is not available anymore in the prototype chain. In this case, the `bark` function is not available anymore on the prototype after `delete Dog.prototype.bark`, yet we still try to access it.
 
-When we try to invoke something that is not a function, a `TypeError` is thrown. In this case `TypeError: pet.bark is not a function`, since `pet.bark` is `undefined`.
+[nice!]`When we try to invoke something that is not a function, a `TypeError` is thrown.` In this case `TypeError: pet.bark is not a function`, since `pet.bark` is `undefined`.
 
 </p>
 </details>
@@ -1743,6 +1771,31 @@ console.log(set);
 <p>
 
 #### Answer: D
+[need more practice in coming days!]
+Set : 
+It is a collection of key-value	It is a collection of unique elements.
+
+let sample = new Set();
+sample.add("Hello");
+sample.add(1)
+sample.add("Bye")
+sample.add("@");
+ 
+for (let item of sample) {
+    console.log(item);
+    }
+
+Map :  is two-dimensional	The set is one dimensional
+Values are accessed using keys	In-built methods are used to access  values.
+
+let sample = new Map();
+sample.set("name", "Ram");
+sample.set("Role", "SDE")
+sample.set("Country", "India")
+ 
+for (let item of sample) {
+    console.log(item);
+    }
 
 The `Set` object is a collection of _unique_ values: a value can only occur once in a set.
 
@@ -1780,7 +1833,7 @@ console.log(myCounter);
 
 #### Answer: C
 
-An imported module is _read-only_: you cannot modify the imported module. Only the module that exports them can change its value.
+An imported module is _read-only_: you cannot modify the imported module. [BINGO***] Only the module that exports them can change its value.
 
 When we try to increment the value of `myCounter`, it throws an error: `myCounter` is read-only and cannot be modified.
 
@@ -2037,7 +2090,7 @@ The fourth time, we pass the `value` object again. `x.number` was previously mod
 <p>
 
 #### Answer: D
-
+[need to understand****]
 The first argument that the `reduce` method receives is the _accumulator_, `x` in this case. The second argument is the _current value_, `y`. With the reduce method, we execute a callback function on every element in the array, which could ultimately result in one single value.
 
 In this example, we are not returning any values, we are simply logging the values of the accumulator and the current value.
@@ -2308,7 +2361,7 @@ console.log(data);
 <p>
 
 #### Answer: C
-
+[Good*]
 An async function always returns a promise. The `await` still has to wait for the promise to resolve: a pending promise gets returned when we call `getData()` in order to set `data` equal to it.
 
 If we wanted to get access to the resolved value `"I made it"`, we could have used the `.then()` method on `data`:
@@ -4991,7 +5044,245 @@ runPromises()
 ```
 
 - A: `[['First', 'Second'], ['Fourth']]`
-- B: `[['First', 'Second'], ['Third', 'Fourth']]`
+- B: `[['First', 'Second'], ['Third', 'F
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++-
+
+
+.ourth']]`
 - C: `[['First', 'Second']]`
 - D: `'Third'`
 
@@ -4999,7 +5290,7 @@ runPromises()
 <p>
 
 #### Answer: D
-
+[NICE***]
 The `Promise.all` method runs the passed promises in parallel. If one promise fails, the `Promise.all` method _rejects_ with the value of the rejected promise. In this case, `promise3` rejected with the value `"Third"`. We’re catching the rejected value in the chained `catch` method on the `runPromises` invocation to catch any errors  within the `runPromises` function. Only `"Third"` gets logged, since `promise3` rejected with this value.
 
 </p>
